@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numberical Method</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<!-- <form id=contact action="/calc" method="post"> -->
+    <section class="header">
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                    <li><a href="https://numbericalmethod.pythonanywhere.com/">Phương pháp</a></li>
+                    <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <div class="container"> 
+        <form id=contact>
+            <h3>Giải theo phương pháp {{pp}} </h3>
+            <p>Bảng sai phân</p>
+            <div id = "Matrix">
+                
+                
+            </div>
+            <h5>Ta nhận được phương trình : </h5>
+            <p> \[P(x) = {{P_latex}}\] <br>
+                Với: 
+                \[  X = {{X}} \]  <br>
+                \[Y = {{Y}}\] 
+            </p>
+            <div class="saiphan">
+                
+            </div>
+        </form>
+    </body>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+var   sp = [[-1.0, 0.125, 1.0, 2.375, 5.0], [1.125, 0.875, 1.375, 2.625], [-0.25, 0.5, 1.25], [0.75, 0.75], [0.0]];
+// var sp = {{ sp }}
+var n = 5;
+var str = '';
+sp = transpose(sp);
+for(let i = 0; i < n; i++) {
+    str += "\t";
+    for(let j = 0; j < n; j++) {
+        str+= sp[i][j];
+        str += "& ";
+    }
+    str += '\n';
+}
+let text = str;
+let matrix_type = "matrix";
+let rows = text.split('\n');
+let latex = `\\[ \\begin{${matrix_type}}\n`;
+rows.forEach((r_val, r_idx) => {
+    let cols = r_val.split('\t');
+    cols.forEach((c_val, c_idx) => {
+        let neg = false;
+        latex += `${neg ? '-' : ''}${c_val}`;
+        if (c_idx == cols.length -1) {
+            if (r_idx == rows.length - 1)
+                latex += " \n";
+            else
+                latex += " \\\\\n";
+        } else {
+            latex += " & ";
+        }
+    });
+});
+latex += `\\end{${matrix_type}}  `;
+
+
+
+latex += "\\]";
+document.getElementById("Matrix").innerHTML = latex;
+
+
+
+
+
+
+
+function transpose(a) {
+ 
+ // Calculate the width and height of the Array
+ var w = a.length || 0;
+ var h = a[0] instanceof Array ? a[0].length : 0;
+
+ // In case it is a zero matrix, no transpose routine needed.
+ if(h === 0 || w === 0) { return []; }
+
+ /**
+  * @var {Number} i Counter
+  * @var {Number} j Counter
+  * @var {Array} t Transposed data is stored in this array.
+  */
+ var i, j, t = [];
+
+ // Loop through every item in the outer array (height)
+ for(i=0; i<h; i++) {
+
+   // Insert a new row (array)
+   t[i] = [];
+
+   // Loop through every item per item in outer array (width)
+   for(j=0; j<w; j++) {
+
+     // Save transposed data.
+     t[i][j] = a[j][i];
+   }
+ }
+
+ return t;
+}
+
+</script>
+</html>

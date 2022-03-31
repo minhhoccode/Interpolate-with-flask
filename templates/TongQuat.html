@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numberical Method</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<!-- <form id=contact action="/calc" method="post"> -->
+    <section class="header">
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                    <li><a href="https://numbericalmethod.pythonanywhere.com/">Phương pháp</a></li>
+                    <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <div class="container"> 
+        <form id=contact>
+            <h3>Giải theo phương pháp {{pp}} </h3>
+            <p>Giải hệ</p>
+            <div id = "Matrix">
+                
+                
+            </div>
+            <h5>Ta nhận được phương trình : </h5>
+            <p> \[P(x) = {{P_latex}}\] <br>
+                Với: 
+                \[  X = {{X}} \]  <br>
+                \[Y = {{Y}}\] 
+            </p>
+            
+        </form>
+    </body>
+    <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+        
+var Y =  {{ Y }} ;
+var A =  {{ A }} ;
+var n = Y.length;
+var str = '';
+
+for(let i = 0; i < n; i++) {
+    str += "\t";
+    for(let j = 0; j < n; j++) {
+        str+= A[i][j];
+        str += "& ";
+    }
+    str += '\n';
+}
+let text = str;
+let matrix_type = "bmatrix";
+let rows = text.split('\n');
+let latex = `\\[ \\begin{${matrix_type}}\n`;
+rows.forEach((r_val, r_idx) => {
+    let cols = r_val.split('\t');
+    cols.forEach((c_val, c_idx) => {
+        let neg = false;
+        if (c_val.indexOf('-') == 0) {
+            neg = true;
+            c_val = c_val.substr(1, c_val.length);
+        }
+        if (c_val.indexOf('/') != -1) {
+            let vals = c_val.split('/');
+            c_val = `\\frac{${vals[0]}}{${vals[1]}}`
+        }
+        latex += `${neg ? '-' : ''}${c_val}`;
+        if (c_idx == cols.length - 1) {
+            if (r_idx == rows.length - 1)
+                latex += " \n";
+            else
+                latex += " \\\\\n";
+        } else {
+            latex += " & ";
+        }
+    });
+});
+latex += `\\end{${matrix_type}}  `;
+
+latex += "\\cdot"
+
+
+
+var str1 = '';
+text = "";
+for(let i = 1; i <= n; i++){
+    text += "\t a_" 
+    text += i;
+    text += "\t \n";
+}
+
+latex += `\\begin{${matrix_type}}\n`;
+rows = text.split('\n');
+rows.forEach((r_val, r_idx) => {
+    let cols = r_val.split('\t');
+    cols.forEach((c_val, c_idx) => {
+        let neg = false;
+        if (c_val.indexOf('-') == 0) {
+            neg = true;
+            c_val = c_val.substr(1, c_val.length);
+        }
+        if (c_val.indexOf('/') != -1) {
+            let vals = c_val.split('/');
+            c_val = `\\frac{${vals[0]}}{${vals[1]}}`
+        }
+        latex += `${neg ? '-' : ''}${c_val}`;
+        if (c_idx == cols.length - 1) {
+            if (r_idx == rows.length - 1)
+                latex += " \n";
+            else
+                latex += " \\\\\n";
+        } else {
+            latex += " & ";
+        }
+    });
+});
+
+latex += `\\end{${matrix_type}}  `;
+
+latex += "=";
+
+text = "";
+
+for(let i = 0; i < n; i++){
+    text += "\t"; 
+    text += Y[i];
+    text += "\t \n";
+}
+
+latex += `\\begin{${matrix_type}}\n`;
+rows = text.split('\n');
+rows.forEach((r_val, r_idx) => {
+    let cols = r_val.split('\t');
+    cols.forEach((c_val, c_idx) => {
+        let neg = false;
+        if (c_val.indexOf('-') == 0) {
+            neg = true;
+            c_val = c_val.substr(1, c_val.length);
+        }
+        if (c_val.indexOf('/') != -1) {
+            let vals = c_val.split('/');
+            c_val = `\\frac{${vals[0]}}{${vals[1]}}`
+        }
+        latex += `${neg ? '-' : ''}${c_val}`;
+        if (c_idx == cols.length - 1) {
+            if (r_idx == rows.length - 1)
+                latex += " \n";
+            else
+                latex += " \\\\\n";
+        } else {
+            latex += " & ";
+        }
+    });
+});
+
+latex += `\\end{${matrix_type}}  `;
+
+
+
+
+
+latex += "\\]"
+document.getElementById("Matrix").innerHTML = latex;
+
+
+</script>
+</html>

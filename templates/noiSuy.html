@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numberical Method</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <section class="header">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                <li><a href="https://numbericalmethod.pythonanywhere.com/">Phương pháp</a></li>
+                <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+            </ul>
+        </div>
+    </nav>
+  </section>
+  <div class="container"> 
+    <form id=contact action="/calc" method="post">
+      <h3>Nội Suy</h3>
+      <h4>các phuong phap tính :Đ</h4>
+      <fieldset>
+        <input name = "X" placeholder="nhập X" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input name = "Y" placeholder="Nhập Y" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset>
+        <select id="choosen" name="choosen">
+            <option value="Tổng quát" >Nội suy tổng quát </option>
+            <option value = "Newton">Nội suy Newton tiến </option>
+            <option value = "Newton Lùi">Nội suy Newton lùi</option>
+            <option value = "Lagrange">Nội suy Lagrange</option>
+        </select>
+      </fieldset>
+      <fieldset> 
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Tính toán</button>
+
+      </fieldset>
+    </form>
+  </div>
+
+</body>
+
+
+</html>

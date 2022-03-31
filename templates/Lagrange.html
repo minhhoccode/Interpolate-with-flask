@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lagrange</title>
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    </head>
+<body>
+
+
+<!-- <form id=contact action="/calc" method="post"> -->
+    <section class="header">
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                    <li><a href="https://numbericalmethod.pythonanywhere.com/">Phương pháp</a></li>
+                    <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <div class="container"> 
+        <form id=contact>
+            <h3>Giải theo phương pháp {{pp}} </h3>
+            <h5>Ta nhận được phương trình : </h5>
+            <p> \[P(x) = {{P_latex}}\] <br>
+                Với: 
+                \[  X = {{X}} \]  <br>
+                \[Y = {{Y}}\] 
+            </p>
+            <div id = "lagrange">
+
+            </div>
+        </form>
+    </div>
+    </body>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+
+var str1 = '\\[&#39;\\left(1.0 - 2.0 x\\right) \\left(1.0 - 1.0 x\\right) \\left(1.0 - 0.666666666666667 x\\right) \\left(1.0 - 0.5 x\\right)&#39;, &#39;2.0 x \\left(1.33333333333333 - 0.666666666666667 x\\right) \\left(1.5 - 1.0 x\\right) \\left(2.0 - 2.0 x\\right)&#39;, &#39;1.0 x \\left(2.0 - 1.0 x\\right) \\left(3.0 - 2.0 x\\right) \\left(2.0 x - 1.0\\right)&#39;, &#39;0.666666666666667 x \\left(4.0 - 2.0 x\\right) \\left(1.0 x - 0.5\\right) \\left(2.0 x - 2.0\\right)&#39;, &#39;0.5 x \\left(0.666666666666667 x - 0.333333333333333\\right) \\left(1.0 x - 1.0\\right) \\left(2.0 x - 3.0\\right)&#39;]\\]';
+var str2 = '\\[&#39;0.666666666666667 x^{4} - 3.33333333333333 x^{3} + 5.83333333333333 x^{2} - 4.16666666666667 x + 1.0&#39;, &#39;- 2.66666666666667 x^{4} + 12.0 x^{3} - 17.3333333333333 x^{2} + 8.0 x&#39;, &#39;4.0 x^{4} - 16.0 x^{3} + 19.0 x^{2} - 6.0 x&#39;, &#39;- 2.66666666666667 x^{4} + 9.33333333333333 x^{3} - 9.33333333333333 x^{2} + 2.66666666666667 x&#39;, &#39;0.666666666666667 x^{4} - 2.0 x^{3} + 1.83333333333333 x^{2} - 0.5 x&#39;\\]'
+
+// var str2 = '{{ s2 }}';
+// console.log(str2);
+// var str1 = '{{ s1 }}' ;
+// console.log(s1[0]);
+// for(var i=0; i<s1.length)
+var s1 = str1.split(",");
+console.log(s1);
+for(var i=0; i<s1.length; i++){
+    s1[i] += '\\]\n';
+    s1[i]=s1[i].replace("&#39;","");
+    s1[i]=s1[i].replace("&#39;","");
+}
+
+var s2 = str2.split(",");
+for(var i=0; i<s2.length; i++){
+    s2[i]+= "\\]\n";
+    s2[i]=s2[i].replace("&#39;","");
+    s2[i]=s2[i].replace("&#39;","");
+}
+var str =[];
+for(let i=0; i<s2.length; i++){
+    str[i] += s1[i];
+
+    str[i] += s2[i];
+}
+
+
+
+// document.getElementById("lagrange").innerHTML = str[0];
+
+
+</script>
+</html>
